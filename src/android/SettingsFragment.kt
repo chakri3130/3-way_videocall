@@ -1,18 +1,14 @@
 package src.cordova.plugin.videocall.SettingsFragment
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.preference.Preference
-import androidx.preference.PreferenceManager
+import com.cloud9.telehealth.R
 import com.twilio.video.Video
-
 import cordova.plugin.videocall.BuildConfig.BuildConfig
 import dagger.android.support.AndroidSupportInjection
-import io.ionic.starter.R
 import src.cordova.plugin.videocall.BaseSettingsFragment.BaseSettingsFragment
 import src.cordova.plugin.videocall.Preferences.Preferences
-import javax.inject.Inject
 
 class SettingsFragment : BaseSettingsFragment() {
 
