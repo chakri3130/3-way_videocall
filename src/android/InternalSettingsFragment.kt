@@ -2,9 +2,9 @@ package src.cordova.plugin.videocall.InternalSettingsFragment
 
 import android.os.Bundle
 import androidx.preference.ListPreference
+import com.cloud9.telehealth.R
 
 
-import io.ionic.starter.R
 import src.cordova.plugin.videocall.BaseSettingsFragment.BaseSettingsFragment
 import src.cordova.plugin.videocall.Preferences.Preferences
 import src.cordova.plugin.videocall.Topology.Topology
