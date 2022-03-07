@@ -22,10 +22,11 @@ import android.widget.EditText;
 import androidx.preference.DialogPreference;
 import androidx.preference.PreferenceDialogFragmentCompat;
 
+import com.cloud9.telehealth.R;
+
 import java.util.Locale;
 
 import cordova.plugin.videocall.NumberPreference.NumberPreference;
-import io.ionic.starter.R;
 import timber.log.Timber;
 
 
