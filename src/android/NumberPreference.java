@@ -15,14 +15,16 @@ package cordova.plugin.videocall.NumberPreference;/*
  */
 
 
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+
 import androidx.preference.DialogPreference;
+
+import com.cloud9.telehealth.R;
+
 import java.util.Locale;
 
-import io.ionic.starter.R;
 
 /**
  * NumberPreference allows to save user input as integer value and limits input type to single one -
