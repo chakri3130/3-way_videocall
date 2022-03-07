@@ -18,8 +18,8 @@ package src.cordova.plugin.videocall.ParticipantPrimaryView
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import com.cloud9.telehealth.databinding.ParticipantPrimaryViewBinding
 import cordova.plugin.videocall.ParticipantView.ParticipantView
-import io.ionic.starter.databinding.ParticipantPrimaryViewBinding
 
 internal class ParticipantPrimaryView @JvmOverloads constructor(
     context: Context,
