@@ -8,7 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import io.ionic.starter.R
+import com.cloud9.telehealth.R
 import src.cordova.plugin.videocall.RoomActivity.RoomActivity
 
 
