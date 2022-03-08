@@ -56,7 +56,8 @@
       <source-file src="src/android/ParticipantView.java" target-dir="src/cordova/plugin/videocall/ParticipantView" />
       <source-file src="src/android/ParticipantViewHolder.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall/ParticipantViewHolder" />
       <source-file src="src/android/PrimaryParticipantController.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall/PrimaryParticipantController" />
-      <source-file src="src/android/RetrofitAPi.java" target-dir="src/cordova/plugin/videocall/RetrofitAPi" />
+      <!-- As we are using this class from TwilioAudio Plugin,so commenting this line instead of removing class from TwilioVideo plugin -->
+      <!-- <source-file src="src/android/RetrofitAPi.java" target-dir="src/cordova/plugin/videocall/RetrofitAPi" /> -->
       <source-file src="src/android/RoomActivity.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall/RoomActivity" />
       <source-file src="src/android/RoomActivityModule.java" target-dir="src/cordova/plugin/videocall/RoomActivityModule" />
       <source-file src="src/android/RoomActivitySubcomponent.java" target-dir="src/cordova/plugin/videocall/RoomActivitySubcomponen" />
@@ -110,9 +111,12 @@
       <source-file src="src/android/CommunityTreeModule.java" target-dir="src/cordova/plugin/videocall/CommunityTreeModule" />
       <source-file src="src/android/VideoApplicationComponent.java" target-dir="src/cordova/plugin/videocall/VideoApplicationComponent" />
 
-      <source-file src="src/android/CustomDialog.kt" target-dir="src/cordova/plugin/videocall" />
-      <source-file src="src/android/ParticipantDetails.kt" target-dir="src/cordova/plugin/videocall" />
-      <source-file src="src/android/SelectParticipantRecycler.kt" target-dir="src/cordova/plugin/videocall" />
+      <source-file src="src/android/CustomDialog.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall" />
+      <source-file src="src/android/ParticipantDetails.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall" />
+      <source-file src="src/android/SelectParticipantRecycler.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall" />
+      <source-file src="src/android/CompleteRoomResponse.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall" />
+      <source-file src="src/android/Response.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall" />
+      <source-file src="src/android/RoomParticipantsResponse.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall" />
       
       <framework custom="true" src="src/android/twiliovideo.gradle" type="gradleReference" />
       
@@ -173,6 +177,9 @@
       <resource-file src="src/android/res/drawable/video_logo_splash.png" target="res/drawable/video_logo_splash/video_logo_splash.png" />
       <resource-file src="src/android/res/drawable/twilio_name_white.png" target="res/drawable/video_logo_splash/twilio_name_white.png" />
       <resource-file src="src/android/res/drawable/ic_videocam_notification.png" target="res/drawable/video_logo_splash/ic_videocam_notification.png" />
+     
+     <resource-file src="src/android/res/drawable/ic_baseline_cancel_24.xml" target="res/drawable/ic_baseline_cancel_24.xml" />
+
       <resource-file src="src/android/res/layout/content_room.xml" target="res/layout/content_room.xml" />
       <resource-file src="src/android/res/layout/join_room.xml" target="res/layout/join_room.xml" />
       <resource-file src="src/android/res/layout/number_preference.xml" target="res/layout/number_preference.xml" />
