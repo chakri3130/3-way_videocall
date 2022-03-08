@@ -69,7 +69,7 @@ dependencies {
   implementation "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
   implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
   implementation 'com.twilio:audioswitch:1.1.2'
-  implementation "com.twilio:video-android-ktx:6.3.0"
+  implementation "com.twilio:video-android-ktx:6.4.0"
   implementation "org.uniflow-kt:uniflow-android:$uniflowVersion"
 
   implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
