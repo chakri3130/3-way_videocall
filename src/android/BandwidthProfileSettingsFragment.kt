@@ -1,9 +1,9 @@
 package src.cordova.plugin.videocall.BandwidthProfileSettingsFragment
 
 import android.os.Bundle
+import com.cloud9.telehealth.R
 
 
-import io.ionic.starter.R
 import src.cordova.plugin.videocall.BaseSettingsFragment.BaseSettingsFragment
 import src.cordova.plugin.videocall.Preferences.Preferences
 

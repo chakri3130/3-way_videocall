@@ -15,7 +15,6 @@ package cordova.plugin.videocall.ClearableEditText;/*
  */
 
 
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
@@ -24,11 +23,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
-import io.ionic.starter.R;
+import com.cloud9.telehealth.R;
 
 
 // TODO Replace custom view with TextInputLayout Material Component as part of

@@ -17,7 +17,12 @@
 package src.cordova.plugin.videocall.VideoApplication
 
 import android.app.Application
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.util.Log
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.multidex.MultiDex
 import cordova.plugin.videocall.ApplicationModule.ApplicationModule
 import cordova.plugin.videocall.VideoApplicationComponent.DaggerVideoApplicationComponent
@@ -31,8 +36,10 @@ import javax.inject.Inject
 class VideoApplication : Application(), HasAndroidInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+
     @Inject
     lateinit var tree: Timber.Tree
+    lateinit var context: Context;
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -41,12 +48,13 @@ class VideoApplication : Application(), HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
-
+        context = this
+//        listenBroadcast()
         DaggerVideoApplicationComponent
-                .builder()
-                .applicationModule(ApplicationModule(this))
-                .build()
-                .inject(this)
+            .builder()
+            .applicationModule(ApplicationModule(this))
+            .build()
+            .inject(this)
 
         Timber.plant(tree)
 
@@ -55,5 +63,17 @@ class VideoApplication : Application(), HasAndroidInjector {
 
     override fun androidInjector(): AndroidInjector<Any> {
         return dispatchingAndroidInjector
+    }
+
+    fun listenBroadcast() {
+        var receiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent) {
+                if (!intent.extras!!.isEmpty) {
+                    Log.e("notification", intent.extras.toString())
+                }
+            }
+        }
+        LocalBroadcastManager.getInstance(context)
+            .registerReceiver(receiver, IntentFilter("notification"))
     }
 }
