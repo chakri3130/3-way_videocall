@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.medleymed.TwilioAudio.ApiService
-import com.medleymed.TwilioAudio.RetrofitAPi
+import cordova.plugin.videocall.ApiService.ApiService
+import cordova.plugin.videocall.RetrofitAPi.RetrofitAPi
 import com.twilio.audioswitch.AudioSwitch
 import com.twilio.video.Participant
 import io.reactivex.android.schedulers.AndroidSchedulers
