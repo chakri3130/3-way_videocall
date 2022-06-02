@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cloud9.telehealth.R
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.medleymed.TwilioAudio.ApiService
-import com.medleymed.TwilioAudio.RetrofitAPi
+import cordova.plugin.videocall.ApiService.ApiService
+import cordova.plugin.videocall.RetrofitAPi.RetrofitAPi
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
