@@ -20,7 +20,6 @@ import SwiftyPickerPopover
 import AppCenter
 import AppCenterDistribute
 import AppCenterAnalytics
-
 protocol roomViewControllerDelegate {
     func LeaveTappped()
 }
@@ -95,7 +94,7 @@ class RoomViewController: UIViewController {
                 if(jsonString == "[]")
                 {
                     self.hideActivityIndicator()
-                    let alert = UIAlertController(title: "Add Participant",message: "Participant is not available for the call.",preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Add Participent",message: "Participant is not available for the call.",preferredStyle: .alert)
 
                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                        self.present(alert, animated: true)
@@ -395,7 +394,7 @@ class RoomViewController: UIViewController {
             Constants.LeaveparticipantStatus = false;
             let params = ["sid":Constants.roomSID] as Dictionary<String, String>
             var request = URLRequest(url: URL(string: "\(Constants.BaseURL)/twilio-video/completeRoom")!)
-//            MSAnalytics.trackEvent("completeRoomAPI Calling Name:\((name , params ,"\(Constants.BaseURL)/twilio-video/completeRoom")) \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+            MSAnalytics.trackEvent("completeRoomAPI Calling Name:\((name , params ,"\(Constants.BaseURL)/twilio-video/completeRoom")) \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
             request.httpMethod = "POST"
                  request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
                  request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -461,7 +460,6 @@ class RoomViewController: UIViewController {
     @IBAction func addButtonTapped(_ sender: Any) {
         print("participents",viewModel.data.participants)
         self.showActivityIndicator()
-        Constants.iscallCount = false
 //        var isDoctor = false
        
 //        var isResponder = false

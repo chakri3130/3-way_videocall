@@ -30,12 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         launchStoresFactory.makeLaunchStores().forEach { $0.start() }
 
-//        if #available(iOS 13.0, *) {
-//
-//        }
         if #available(iOS 13, *) {
             // Do nothing because SceneDelegate will handle it
-            window?.overrideUserInterfaceStyle = .light
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
             launchFlow = launchFlowFactory.makeLaunchFlow(window: window!)

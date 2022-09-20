@@ -34,7 +34,6 @@ import UIKit
     var delegate : roomViewControllerDelegate?
        
     let localParticipant: LocalParticipant
-    var callCount : Int = 0
     var isRecording: Bool { room?.isRecording ?? false }
     private(set) var remoteParticipants: [RemoteParticipant] = []
     private(set) var state: RoomState = .disconnected
@@ -64,11 +63,6 @@ import UIKit
     func dismis() {
           self.delegate?.LeaveTappped()
        }
-    deinit {
-          NotificationCenter.default
-           .removeObserver(self, name:  NSNotification.Name("ParticipantRejectedTheCall"), object: nil)
-            
-        }
     func connect(roomName: String,tokenIS:String) {
         print("Avinash -- connect")
         guard state == .disconnected else { fatalError("Connection already in progress.") }
@@ -129,43 +123,6 @@ extension Room: TwilioVideo.RoomDelegate {
         print("Avinash -- roomDidConnect")
         localParticipant.participant = room.localParticipant
         Constants.roomSID = room.sid
-        self.callCount = 0
-        Constants.iscallCount = false
-               print("ParticipantRejectedTheCall Avinash room connect")
-               
-               NotificationCenter.default.addObserver(forName:Notification.Name("ParticipantRejectedTheCall"),
-                              object:nil, queue:nil) {
-                   notification in
-                   
-                   print("Participant Rejected text")
-                   print("Participant Rejected text",self.callCount)
-                   var jsonString: String? = nil
-                   jsonString = notification.userInfo?["RejectedParticipant"] as? String
-                 
-                   if(Constants.iscallCount == false)
-                   {
-                       print("Participant Rejected text",self.callCount)
-                                   let alert = UIAlertController(title: "I am currently unavailable",message: "Please feel free to message me in Chat and I will get back to you as soon as possible.",preferredStyle: .alert)
-                       
-                                      alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                   
-                   var topController:UIViewController = UIApplication.shared.keyWindow!.rootViewController!
-                       while ((topController.presentedViewController) != nil) {
-                           topController = topController.presentedViewController!
-                       }
-                       topController.present(alert, animated:true, completion:nil)
-       //                self.callCount = self.callCount+1
-                       if(room.remoteParticipants.count >= 2)
-                       {
-                           Constants.iscallCount = false
-                       }
-                       else
-                       {
-                       Constants.iscallCount = true
-                       }
-                       print("Participant Rejected text",self.callCount)
-                   }
-               }
         remoteParticipants = room.remoteParticipants.map {
             RemoteParticipant(participant: $0, delegate: self)
         }
@@ -193,7 +150,7 @@ extension Room: TwilioVideo.RoomDelegate {
         print("Avinash -- roomDidFailToConnect")
             state = .disconnected
 
-//        MSAnalytics.trackEvent("Name:\(String(describing: room.localParticipant?.identity)),roomDidFailToConnect: ,\(error),\(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+        MSAnalytics.trackEvent("Name:\(String(describing: room.localParticipant?.identity)),roomDidFailToConnect: ,\(error),\(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
 
 
             post(.didFailToConnect(error: error))
@@ -204,12 +161,10 @@ extension Room: TwilioVideo.RoomDelegate {
     func roomDidDisconnect(room: TwilioVideo.Room, error: Error?) {
         print("Avinash -- roomDidDisconnect")
         localParticipant.participant = nil
-                NotificationCenter.default
-                 .removeObserver(self, name:  NSNotification.Name("ParticipantRejectedTheCall"), object: nil)
         let errorMsg = error?.localizedDescription
-//        MSAnalytics.trackEvent("Name:\(String(describing: room.localParticipant?.identity)),roomDidDisconnect: ,\(String(describing: errorMsg)) \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+        MSAnalytics.trackEvent("Name:\(String(describing: room.localParticipant?.identity)),roomDidDisconnect: ,\(String(describing: errorMsg)) \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
         Constants.isParticipantJOIN = false
-        Constants.iscallCount = true
+        
         let participants = remoteParticipants
         remoteParticipants.removeAll()
         state = .disconnected
@@ -222,8 +177,6 @@ extension Room: TwilioVideo.RoomDelegate {
     
     func participantDidConnect(room: TwilioVideo.Room, participant: TwilioVideo.RemoteParticipant) {
         Constants.isParticipantJOIN = true
-        self.callCount = 0
-               Constants.iscallCount = false
         if(room.remoteParticipants.count == 2)
         {
             Constants.isthereParticipantJOIN = true
@@ -237,8 +190,7 @@ extension Room: TwilioVideo.RoomDelegate {
     func participantDidDisconnect(room: TwilioVideo.Room, participant: TwilioVideo.RemoteParticipant) {
         MSAnalytics.trackEvent("REMOTE PARTCICPANT DISCONNECTED");
         print("remote participant disconnected");
-        self.callCount = 0
-               Constants.iscallCount = false
+        
         if(room.remoteParticipants.count < 1 && Constants.isParticipantJOIN == true)
         {
             self.completeRoomAPI(name: "")
@@ -283,7 +235,7 @@ extension Room: ParticipantDelegate {
             Constants.LeaveparticipantStatus = false;
             let params = ["sid":Constants.roomSID] as Dictionary<String, String>
             var request = URLRequest(url: URL(string: "\(Constants.BaseURL)/twilio-video/completeRoom")!)
-//            MSAnalytics.trackEvent("completeRoomAPI Calling Name:\((name , params ,"\(Constants.BaseURL)/twilio-video/completeRoom")) \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+            MSAnalytics.trackEvent("completeRoomAPI Calling Name:\((name , params ,"\(Constants.BaseURL)/twilio-video/completeRoom")) \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
             request.httpMethod = "POST"
                  request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
                  request.addValue("application/json", forHTTPHeaderField: "Content-Type")
