@@ -280,6 +280,7 @@
       <source-file src="src/ios/VideoSource.swift" />
       <source-file src="src/ios/VideoTrack.swift" />
       <source-file src="src/ios/VideoView.swift" />
+      <source-file src="src/ios/Constants.swift" />
        <resource-file src="src/ios/Resources/Error.png" target="Resources/Error.png" />
        <resource-file src="src/ios/Resources/hangup icon.png" target="Resources/hangup icon.png" />  
        <resource-file src="src/ios/Resources/hangup icon@2x.png" target="Resources/hangup icon@2x.png" />
