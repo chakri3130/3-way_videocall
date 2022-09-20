@@ -302,8 +302,6 @@
       <resource-file src="src/ios/Resources/stats disabled image@3x.png" target="Resources/stats disabled image@3x.png" />
       <resource-file src="src/ios/Resources/Vector-1.png" target="Resources/Vector-1.png" />
       <resource-file src="src/ios/Resources/Vector-2.png" target="Resources/Vector-2.png" />
-       <resource-file src="src/ios/Resources/ParticipantCell.xib" target="Resources/ParticipantCell.xib" />
-      <resource-file src="src/ios/Resources/Video.storyboard" target="Resources/Video.storyboard" />
       <resource-file src="src/ios/Resources/videocam_off-24px 1.png" target="Resources/videocam_off-24px 1.png" />
       <resource-file src="src/ios/Resources/videocam-24px 1.png" target="Resources/videocam-24px 1.png" />
       <resource-file src="src/ios/Resources/network-quality-level-0~universal@1x.png" target="Resources/network-quality-level-0~universal@1x.png" />
@@ -330,7 +328,17 @@
        <resource-file src="src/ios/Resources/network-quality-level-5~universal@2x.png" target="Resources/network-quality-level-5~universal@2x.png" />
        <resource-file src="src/ios/Resources/network-quality-level-5~universal@3x.png" target="Resources/network-quality-level-5~universal@3x.png" />
       
+      <resource-file src="src/ios/Resources/add.png" target="Resources/add.png" />
+ 
+      <resource-file src="src/ios/Resources/BasicCell.xib" target="Resources/BasicCell.xib" />
+      <resource-file src="src/ios/Resources/DestructiveButtonCell.xib" target="DestructiveButtonCell.xib" />
+      <resource-file src="src/ios/Resources/EditTextCell.xib" target="Resources/EditTextCell.xib" />
+      <resource-file src="src/ios/Resources/Main.storyboard" target="Resources/Main.storyboard" />
+      <resource-file src="src/ios/Resources/ParticipantCell.xib" target="Resources/ParticipantCell.xib" />
+      <resource-file src="src/ios/Resources/RightDetailCell.xib" target="Resources/RightDetailCell.xib" />
+      <resource-file src="src/ios/Resources/SwitchCell.xib" target="Resources/SwitchCell.xib" />
       <resource-file src="src/ios/Resources/VideoView.xib" target="Resources/VideoView.xib" />
+      
       <!-- <framework src="TwilioVideo" type="podspec" spec="~> 4.4.0" />
       <framework src="IGListDiffKit" type="podspec" spec="~>4.0.0" /> -->
       <podspec>
