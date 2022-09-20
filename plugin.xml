@@ -117,6 +117,7 @@
       <source-file src="src/android/CompleteRoomResponse.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall" />
       <source-file src="src/android/Response.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall" />
       <source-file src="src/android/RoomParticipantsResponse.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall" />
+      <source-file src="src/android/Analytics.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/Analytics" />
       
       <framework custom="true" src="src/android/twiliovideo.gradle" type="gradleReference" />
       
