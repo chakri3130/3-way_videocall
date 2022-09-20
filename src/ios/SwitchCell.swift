@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2020 Twilio, Inc.
+//  Copyright (C) 2019 Twilio, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,21 +14,14 @@
 //  limitations under the License.
 //
 
-import Foundation
+import UIKit
 
-struct RoomViewModelData {
-    struct MainParticipant {
-        let identity: String
-        let videoConfig: VideoView.Config
-        
-        init(participant: Cloud9.Participant, videoTrack: VideoTrack?) {
-            identity = participant.identity
-            videoConfig = .init(videoTrack: videoTrack, shouldMirror: participant.shouldMirrorCameraVideo)
-        }
-    }
+class SwitchCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var switchView: UISwitch!
+    var updateHandler: ((Bool) -> Void)?
     
-    let roomName: String
-    let participants: [Participant]
-    let mainParticipant: MainParticipant
-    let isRecording: Bool
+    @IBAction func switchChange(_ sender: UISwitch) {
+        updateHandler?(sender.isOn)
+    }
 }

@@ -17,15 +17,15 @@
 import TwilioVideo
 
 class RoomFactory {
-    func makeRoom() -> Room {
+    func makeRoom(identity:String) -> Room {
         let localParticipant = LocalParticipant(
-            identity: "ram",
+            identity:identity, //UserStoreFactory().makeUserStore().user.displayName,
             micTrackFactory: MicTrackFactory(),
             cameraManagerFactory: CameraManagerFactory()
         )
         return Room(
             localParticipant: localParticipant,
-//            accessTokenStore: TwilioAccessTokenStoreFactory().makeTwilioAccessTokenStore(),
+            accessTokenStore: TwilioAccessTokenStoreFactory().makeTwilioAccessTokenStore(),
             connectOptionsFactory: ConnectOptionsFactory(),
             notificationCenter: .default,
             twilioVideoSDKType: TwilioVideoSDK.self

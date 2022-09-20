@@ -14,21 +14,20 @@
 //  limitations under the License.
 //
 
-import Foundation
+import GoogleSignIn
+import UIKit
 
-struct RoomViewModelData {
-    struct MainParticipant {
-        let identity: String
-        let videoConfig: VideoView.Config
+class LoginViewController: UIViewController {
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        init(participant: Cloud9.Participant, videoTrack: VideoTrack?) {
-            identity = participant.identity
-            videoConfig = .init(videoTrack: videoTrack, shouldMirror: participant.shouldMirrorCameraVideo)
+        GIDSignIn.sharedInstance().presentingViewController = self
+        googleSignInButton.style = .wide
+        
+        if #available(iOS 13, *) {
+            isModalInPresentation = true
         }
     }
-    
-    let roomName: String
-    let participants: [Participant]
-    let mainParticipant: MainParticipant
-    let isRecording: Bool
 }

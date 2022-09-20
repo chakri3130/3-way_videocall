@@ -17,15 +17,16 @@
 import Foundation
 
 struct AppInfo {
-   enum Target: String, Equatable {
-        case videoInternal = "Video-Internal"
-        case videoCommunity = "MyApp"
-  }
+    enum Target: String, Equatable {
+        case videoInternal = "Cloud9"
+        case videoCommunity = "Video-Community"
+    }
     enum myTarget: String, Equatable {
-        case videoCommunity = "MyApp"
+        case videoCommunity = "Cloud9"
+        
     }
     let appCenterAppSecret: String
     let version: String
     let build: String
-    let target: myTarget
+    let target: Target
 }

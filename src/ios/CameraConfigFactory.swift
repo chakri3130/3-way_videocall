@@ -22,8 +22,8 @@ struct CameraConfig {
 }
 
 class CameraConfigFactory {
-   private let appSettingsStore: AppSettingsStoreWriting = AppSettingsStore.shared
-   private let remoteConfigStore: RemoteConfigStoreReading = RemoteConfigStoreFactory().makeRemoteConfigStore()
+    private let appSettingsStore: AppSettingsStoreWriting = AppSettingsStore.shared
+    private let remoteConfigStore: RemoteConfigStoreReading = RemoteConfigStoreFactory().makeRemoteConfigStore()
     
     func makeCameraConfigFactory(captureDevice: AVCaptureDevice) -> CameraConfig {
         var targetSize: CMVideoDimensions {

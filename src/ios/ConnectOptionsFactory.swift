@@ -17,7 +17,7 @@
 import TwilioVideo
 
 @objc class ConnectOptionsFactory: NSObject {
-//    private let appSettingsStore: AppSettingsStoreWriting = AppSettingsStore.shared
+    private let appSettingsStore: AppSettingsStoreWriting = AppSettingsStore.shared
     
     @objc func makeConnectOptions(
         accessToken: String,
@@ -26,47 +26,48 @@ import TwilioVideo
         videoTracks: [TwilioVideo.LocalVideoTrack]
     ) -> ConnectOptions {
         ConnectOptions(token: accessToken) { builder in
-//            var videoBitrate: UInt {
-//                switch self.appSettingsStore.videoCodec {
-//                case .h264: return 1_200
-//                case .vp8: return 1_200
-//                case .vp8SimulcastVGA: return 0
-//                case .vp8SimulcastHD: return 1_600
-//                }
-//            }
+            var videoBitrate: UInt {
+                switch self.appSettingsStore.videoCodec {
+                case .h264: return 1_200
+                case .vp8: return 1_200
+                case .vp8SimulcastVGA: return 0
+                case .vp8SimulcastHD: return 1_600
+                }
+            }
             
             builder.roomName = roomName
             builder.audioTracks = audioTracks
             builder.videoTracks = videoTracks
             builder.isDominantSpeakerEnabled = true
             builder.isNetworkQualityEnabled = true
-//            builder.areInsightsEnabled = self.appSettingsStore.areInsightsEnabled
+            builder.areInsightsEnabled = self.appSettingsStore.areInsightsEnabled
             builder.networkQualityConfiguration = NetworkQualityConfiguration(
                 localVerbosity: .minimal,
                 remoteVerbosity: .minimal
             )
-//            builder.bandwidthProfileOptions = BandwidthProfileOptions(
-//                videoOptions: VideoBandwidthProfileOptions { builder in
-//                    builder.mode = TwilioVideo.BandwidthProfileMode(setting: self.appSettingsStore.bandwidthProfileMode)
-//                    builder.maxSubscriptionBitrate = self.appSettingsStore.maxSubscriptionBitrate as NSNumber?
-//                    builder.maxTracks = self.appSettingsStore.maxTracks as NSNumber?
-//                    builder.dominantSpeakerPriority = Track.Priority(setting: self.appSettingsStore.dominantSpeakerPriority)
-//                    builder.trackSwitchOffMode = Track.SwitchOffMode(setting: self.appSettingsStore.trackSwitchOffMode)
-//                    let renderDimensions = VideoRenderDimensions()
-//                    renderDimensions.low = VideoDimensions(setting: self.appSettingsStore.lowRenderDimensions)
-//                    renderDimensions.standard = VideoDimensions(setting: self.appSettingsStore.standardRenderDimensions)
-//                    renderDimensions.high = VideoDimensions(setting: self.appSettingsStore.highRenderDimensions)
-//                    builder.renderDimensions = renderDimensions
-//                }
-//            )
-//            builder.preferredVideoCodecs = [TwilioVideo.VideoCodec.make(setting: self.appSettingsStore.videoCodec)]
-//            builder.encodingParameters = EncodingParameters(audioBitrate: 16, videoBitrate: videoBitrate)
+            builder.bandwidthProfileOptions = BandwidthProfileOptions(
+                videoOptions: VideoBandwidthProfileOptions { builder in
+                    builder.mode = TwilioVideo.BandwidthProfileMode(setting: self.appSettingsStore.bandwidthProfileMode)
+                    builder.maxSubscriptionBitrate = self.appSettingsStore.maxSubscriptionBitrate as NSNumber?
+                //    builder.maxTracks = self.appSettingsStore.maxTracks as NSNumber?
+                    builder.dominantSpeakerPriority = Track.Priority(setting: self.appSettingsStore.dominantSpeakerPriority)
+                    builder.trackSwitchOffMode = Track.SwitchOffMode(setting: self.appSettingsStore.trackSwitchOffMode)
+                    let renderDimensions = VideoRenderDimensions()
+                    renderDimensions.low = VideoDimensions(setting: self.appSettingsStore.lowRenderDimensions)
+                    renderDimensions.standard = VideoDimensions(setting: self.appSettingsStore.standardRenderDimensions)
+                    renderDimensions.high = VideoDimensions(setting: self.appSettingsStore.highRenderDimensions)
+                   // builder.renderDimensions = renderDimensions
+                    builder.contentPreferencesMode = .auto
+                }
+            )
+            builder.preferredVideoCodecs = [TwilioVideo.VideoCodec.make(setting: self.appSettingsStore.videoCodec)]
+            builder.encodingParameters = EncodingParameters(audioBitrate: 16, videoBitrate: videoBitrate)
             
-//            if self.appSettingsStore.isTURNMediaRelayOn {
-//                builder.iceOptions = IceOptions() { builder in
-//                    builder.transportPolicy = .relay
-//                }
-//            }
+            if self.appSettingsStore.isTURNMediaRelayOn {
+                builder.iceOptions = IceOptions() { builder in
+                    builder.transportPolicy = .relay
+                }
+            }
         }
     }
 }

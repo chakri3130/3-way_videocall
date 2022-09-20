@@ -26,14 +26,10 @@ class AppInfoStore: AppInfoStoreReading {
             appCenterAppSecret:"poioo" as! String,
             version: bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String,
             build: bundle.object(forInfoDictionaryKey: "CFBundleVersion") as! String,
-            target: AppInfo.myTarget(rawValue: "MyApp")!
+            target: AppInfo.Target(rawValue: "Cloud9")!
+                
+//                AppInfo.myTarget(rawValue: "Cloud9")!
         )
-//        AppInfo(
-//            appCenterAppSecret: "kkkkkk",
-//            version: "0.1.0" as! String,
-//            build: "79" as! String,
-//            target: AppInfo.Target(rawValue: bundle.object(forInfoDictionaryKey: "TargetName") as! String)!!
-//        )
     }
     private let bundle: BundleProtocol
 

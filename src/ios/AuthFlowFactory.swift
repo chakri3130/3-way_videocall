@@ -14,21 +14,16 @@
 //  limitations under the License.
 //
 
-import Foundation
+import UIKit
 
-struct RoomViewModelData {
-    struct MainParticipant {
-        let identity: String
-        let videoConfig: VideoView.Config
-        
-        init(participant: Cloud9.Participant, videoTrack: VideoTrack?) {
-            identity = participant.identity
-            videoConfig = .init(videoTrack: videoTrack, shouldMirror: participant.shouldMirrorCameraVideo)
-        }
+protocol AuthFlowFactory: AnyObject {
+    func makeAuthFlow(window: UIWindow) -> AuthFlow
+}
+
+class AuthFlowFactoryImpl: AuthFlowFactory {
+    func makeAuthFlow(window: UIWindow) -> AuthFlow {
+        let appInfoStore = AppInfoStoreFactory().makeAppInfoStore()
+        let signInSegueIdentifierFactory = SignInSegueIdentifierFactoryImpl(appInfoStore: appInfoStore)
+        return AuthFlow(window: window, signInSegueIdentifierFactory: signInSegueIdentifierFactory)
     }
-    
-    let roomName: String
-    let participants: [Participant]
-    let mainParticipant: MainParticipant
-    let isRecording: Bool
 }

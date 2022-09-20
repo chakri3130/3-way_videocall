@@ -105,6 +105,9 @@ extension RemoteParticipant: RemoteParticipantDelegate {
         publication: RemoteVideoTrackPublication,
         participant: TwilioVideo.RemoteParticipant
     ) {
+        
+        
+        
         guard let source = videoTrack.source else { return }
 
         switch source {

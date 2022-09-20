@@ -53,7 +53,6 @@ class RoomViewModel {
         set { room.localParticipant.cameraPosition = newValue }
     }
     private let roomName: String
-//    private let token: String
     private let room: Room
     private let participantsStore: ParticipantsStore
     private let mainParticipantStore: MainParticipantStore
@@ -61,7 +60,6 @@ class RoomViewModel {
 
     init(
         roomName: String,
-     
         room: Room,
         participantsStore: ParticipantsStore,
         mainParticipantStore: MainParticipantStore,
@@ -69,7 +67,6 @@ class RoomViewModel {
     ) {
         self.roomName = roomName
         self.room = room
-       
         self.participantsStore = participantsStore
         self.mainParticipantStore = mainParticipantStore
         self.notificationCenter = notificationCenter
@@ -78,8 +75,8 @@ class RoomViewModel {
         notificationCenter.addObserver(self, selector: #selector(handleMainParticipantStoreUpdate), name: .mainParticipantStoreUpdate, object: mainParticipantStore)
     }
     
-    func connect() {
-        room.connect(roomName: roomName)
+    func connect(accseesToken:String) {
+        room.connect(roomName: roomName, tokenIS: accseesToken)
     }
     
     func disconnect() {

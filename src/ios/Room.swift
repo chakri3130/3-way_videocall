@@ -15,8 +15,11 @@
 //
 
 import TwilioVideo
-
-@objc class Room: NSObject {
+import AppCenter
+import AppCenterDistribute
+import AppCenterAnalytics
+import UIKit
+@objc class Room:NSObject {
     enum Update {
         case didStartConnecting
         case didConnect
@@ -28,26 +31,29 @@ import TwilioVideo
         case didStartRecording
         case didStopRecording
     }
-
+    var delegate : roomViewControllerDelegate?
+       
     let localParticipant: LocalParticipant
+    var callCount : Int = 0
     var isRecording: Bool { room?.isRecording ?? false }
     private(set) var remoteParticipants: [RemoteParticipant] = []
     private(set) var state: RoomState = .disconnected
     @objc private(set) var room: TwilioVideo.Room? // Only exposed for stats and should not be used for anything else
-//    private let accessTokenStore: TwilioAccessTokenStoreReading
+    private let accessTokenStore: TwilioAccessTokenStoreReading
     private let connectOptionsFactory: ConnectOptionsFactory
     private let notificationCenter: NotificationCenter
     private let twilioVideoSDKType: TwilioVideoSDK.Type
     
+   
     init(
         localParticipant: LocalParticipant,
-//        accessTokenStore: TwilioAccessTokenStoreReading,
+        accessTokenStore: TwilioAccessTokenStoreReading,
         connectOptionsFactory: ConnectOptionsFactory,
-       notificationCenter: NotificationCenter,
+        notificationCenter: NotificationCenter,
         twilioVideoSDKType: TwilioVideoSDK.Type
     ) {
         self.localParticipant = localParticipant
-//        self.accessTokenStore = accessTokenStore
+        self.accessTokenStore = accessTokenStore
         self.connectOptionsFactory = connectOptionsFactory
         self.notificationCenter = notificationCenter
         self.twilioVideoSDKType = twilioVideoSDKType
@@ -55,20 +61,27 @@ import TwilioVideo
         localParticipant.delegate = self
     }
 
-    func connect(roomName: String) {
+    func dismis() {
+          self.delegate?.LeaveTappped()
+       }
+    deinit {
+          NotificationCenter.default
+           .removeObserver(self, name:  NSNotification.Name("ParticipantRejectedTheCall"), object: nil)
+            
+        }
+    func connect(roomName: String,tokenIS:String) {
+        print("Avinash -- connect")
         guard state == .disconnected else { fatalError("Connection already in progress.") }
 
         state = .connecting
-        
+//        post(.didStartConnecting)
         let options = self.connectOptionsFactory.makeConnectOptions(
-            accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTS2IwN2Q3YzIxYjQ1ZmZkZjI1N2Y5M2JjNTkzNWM2MmMyLTE2MjYyNjE2MDkiLCJncmFudHMiOnsiaWRlbnRpdHkiOiJyYW0iLCJ2aWRlbyI6e319LCJpYXQiOjE2MjYyNjE2MDksImV4cCI6MTYyNjI2NTIwOSwiaXNzIjoiU0tiMDdkN2MyMWI0NWZmZGYyNTdmOTNiYzU5MzVjNjJjMiIsInN1YiI6IkFDOTliMTgzMTNkZDNkOWM1YWYzMjhhZDdkMmI0ZTNhOGMifQ.EiaVMiypinV6gHSXZ-nRmX8j3VuFrTDVDGx1Mw62MXI",
-            roomName: "chetan04",
+            accessToken: tokenIS,
+            roomName: roomName,
             audioTracks: [self.localParticipant.micTrack].compactMap { $0 },
             videoTracks: [self.localParticipant.localCameraTrack].compactMap { $0 }
         )
         self.room = self.twilioVideoSDKType.connect(options: options, delegate: self)
-        
-//        post(.didStartConnecting)
 
 //        accessTokenStore.fetchTwilioAccessToken(roomName: roomName) { [weak self] result in
 //            guard let self = self else { return }
@@ -86,10 +99,11 @@ import TwilioVideo
 //                self.state = .disconnected
 //                self.post(.didFailToConnect(error: error))
 //            }
-//        }
+        //}
     }
 
     func disconnect() {
+        print("Avinash -- disconnect")
         room?.disconnect()
     }
     
@@ -102,7 +116,7 @@ import TwilioVideo
         }
         
         new.isPinned.toggle()
-       post(.didUpdateParticipants(participants: [old, new].compactMap { $0 }))
+        post(.didUpdateParticipants(participants: [old, new].compactMap { $0 }))
     }
     
     private func post(_ update: Update) {
@@ -112,42 +126,128 @@ import TwilioVideo
 
 extension Room: TwilioVideo.RoomDelegate {
     func roomDidConnect(room: TwilioVideo.Room) {
+        print("Avinash -- roomDidConnect")
         localParticipant.participant = room.localParticipant
+        Constants.roomSID = room.sid
+        self.callCount = 0
+        Constants.iscallCount = false
+               print("ParticipantRejectedTheCall Avinash room connect")
+               
+               NotificationCenter.default.addObserver(forName:Notification.Name("ParticipantRejectedTheCall"),
+                              object:nil, queue:nil) {
+                   notification in
+                   
+                   print("Participant Rejected text")
+                   print("Participant Rejected text",self.callCount)
+                   var jsonString: String? = nil
+                   jsonString = notification.userInfo?["RejectedParticipant"] as? String
+                 
+                   if(Constants.iscallCount == false)
+                   {
+                       print("Participant Rejected text",self.callCount)
+                                   let alert = UIAlertController(title: "I am currently unavailable",message: "Please feel free to message me in Chat and I will get back to you as soon as possible.",preferredStyle: .alert)
+                       
+                                      alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                   
+                   var topController:UIViewController = UIApplication.shared.keyWindow!.rootViewController!
+                       while ((topController.presentedViewController) != nil) {
+                           topController = topController.presentedViewController!
+                       }
+                       topController.present(alert, animated:true, completion:nil)
+       //                self.callCount = self.callCount+1
+                       if(room.remoteParticipants.count >= 2)
+                       {
+                           Constants.iscallCount = false
+                       }
+                       else
+                       {
+                       Constants.iscallCount = true
+                       }
+                       print("Participant Rejected text",self.callCount)
+                   }
+               }
         remoteParticipants = room.remoteParticipants.map {
             RemoteParticipant(participant: $0, delegate: self)
         }
         state = .connected
         post(.didConnect)
-
+        Constants.isthereParticipantJOIN = false
+        if(room.remoteParticipants.count == 2)
+        {
+            Constants.isthereParticipantJOIN = true
+        }
+       
+        
+        if (remoteParticipants.count >= 1)
+        {
+            Constants.isParticipantJOIN = true
+            print("roomDidConnect :", Constants.isParticipantJOIN)
+        }
+        
         if !remoteParticipants.isEmpty {
             post(.didAddRemoteParticipants(participants: remoteParticipants))
         }
     }
     
     func roomDidFailToConnect(room: TwilioVideo.Room, error: Error) {
-        state = .disconnected
-//        post(.didFailToConnect(error: error))
-    }
+        print("Avinash -- roomDidFailToConnect")
+            state = .disconnected
+
+//        MSAnalytics.trackEvent("Name:\(String(describing: room.localParticipant?.identity)),roomDidFailToConnect: ,\(error),\(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+
+
+            post(.didFailToConnect(error: error))
+
+        }
+
     
     func roomDidDisconnect(room: TwilioVideo.Room, error: Error?) {
+        print("Avinash -- roomDidDisconnect")
         localParticipant.participant = nil
+                NotificationCenter.default
+                 .removeObserver(self, name:  NSNotification.Name("ParticipantRejectedTheCall"), object: nil)
+        let errorMsg = error?.localizedDescription
+//        MSAnalytics.trackEvent("Name:\(String(describing: room.localParticipant?.identity)),roomDidDisconnect: ,\(String(describing: errorMsg)) \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+        Constants.isParticipantJOIN = false
+        Constants.iscallCount = true
         let participants = remoteParticipants
         remoteParticipants.removeAll()
         state = .disconnected
-//        post(.didDisconnect(error: error))
+        post(.didDisconnect(error: error))
         
         if !remoteParticipants.isEmpty {
-          post(.didRemoveRemoteParticipants(participants: participants))
+            post(.didRemoveRemoteParticipants(participants: participants))
         }
     }
     
     func participantDidConnect(room: TwilioVideo.Room, participant: TwilioVideo.RemoteParticipant) {
+        Constants.isParticipantJOIN = true
+        self.callCount = 0
+               Constants.iscallCount = false
+        if(room.remoteParticipants.count == 2)
+        {
+            Constants.isthereParticipantJOIN = true
+        }
+        
         remoteParticipants.append(RemoteParticipant(participant: participant, delegate: self))
     
-       post(.didAddRemoteParticipants(participants: [remoteParticipants.last!]))
+        post(.didAddRemoteParticipants(participants: [remoteParticipants.last!]))
     }
     
     func participantDidDisconnect(room: TwilioVideo.Room, participant: TwilioVideo.RemoteParticipant) {
+        MSAnalytics.trackEvent("REMOTE PARTCICPANT DISCONNECTED");
+        print("remote participant disconnected");
+        self.callCount = 0
+               Constants.iscallCount = false
+        if(room.remoteParticipants.count < 1 && Constants.isParticipantJOIN == true)
+        {
+            self.completeRoomAPI(name: "")
+            let objToBeSent = "Test Message from Notification"
+        
+            
+            NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: objToBeSent)
+            Constants.isthereParticipantJOIN = false
+        }
         guard let index = remoteParticipants.firstIndex(where: { $0.identity == participant.identity }) else { return }
         
         post(.didRemoveRemoteParticipants(participants: [remoteParticipants.remove(at: index)]))
@@ -167,12 +267,57 @@ extension Room: TwilioVideo.RoomDelegate {
     }
     
     func roomDidStopRecording(room: TwilioVideo.Room) {
-      post(.didStopRecording)
+        post(.didStopRecording)
     }
 }
 
 extension Room: ParticipantDelegate {
     func didUpdate(participant: Participant) {
-       post(.didUpdateParticipants(participants: [participant]))
+        post(.didUpdateParticipants(participants: [participant]))
     }
+    
+    
+    func completeRoomAPI(name:String)
+        {
+           
+            Constants.LeaveparticipantStatus = false;
+            let params = ["sid":Constants.roomSID] as Dictionary<String, String>
+            var request = URLRequest(url: URL(string: "\(Constants.BaseURL)/twilio-video/completeRoom")!)
+//            MSAnalytics.trackEvent("completeRoomAPI Calling Name:\((name , params ,"\(Constants.BaseURL)/twilio-video/completeRoom")) \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+            request.httpMethod = "POST"
+                 request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+         
+                 let session = URLSession.shared
+                 let task = session.dataTask(with: request, completionHandler: { [self] data, response, error -> Void in
+                     print(response!)
+                     do {
+                         let json = try JSONSerialization.jsonObject(with: data!) as! [String:Any]
+                         print("json",json)
+//                         let data = json["data"] as! [String:Any]
+//
+//                         if(data["error"] as! Bool == false)
+//                         {
+//                             let button = UIButton()
+//
+//                         }
+//                         let alert = UIAlertController(title: "",message: data["message"] as? String ,preferredStyle: .alert)
+//
+//                            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//                            self.present(alert, animated: true)
+//                         print("token is ", data["token"]!)
+//                         self.tokenIS = data["token"] as! String
+         //                viewModel.delegate = self
+         //                viewModel.connect()
+         
+                        
+                     } catch {
+                         print("error")
+                     }
+                 })
+         
+                 task.resume()
+            
+        }
 }
+

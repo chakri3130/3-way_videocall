@@ -39,13 +39,13 @@ class RemoteConfigStore: RemoteConfigStoreWriting {
                 switch appInfoStore.appInfo.target {
                 case .videoCommunity:
                     return .peerToPeer
-//                case .videoInternal:
-//                    switch appSettingsStore.topology {
-//                    case .go: return .go
-//                    case .group: return .group
-//                    case .groupSmall: return .groupSmall
-//                    case .peerToPeer: return .peerToPeer
-//                    }
+                case .videoInternal:
+                    switch appSettingsStore.topology {
+                    case .go: return .go
+                    case .group: return .group
+                    case .groupSmall: return .groupSmall
+                    case .peerToPeer: return .peerToPeer
+                    }
                 }
             }
             

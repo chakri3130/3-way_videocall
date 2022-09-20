@@ -71,7 +71,7 @@ class AppSettingsStore: AppSettingsStoreWriting {
     private let userDefaults: UserDefaultsProtocol
     private static var defaultVideoCodec: VideoCodec {
         switch appInfoStore.appInfo.target {
-//        case .videoInternal: return .vp8SimulcastVGA
+        case .videoInternal: return .vp8SimulcastVGA
         case .videoCommunity: return .vp8
         }
     }

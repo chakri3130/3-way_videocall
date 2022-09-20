@@ -16,18 +16,24 @@
 
 import UIKit
 
-class LobbyViewController: UIViewController {
+
+class LobbyViewController: UIViewController, roomViewControllerDelegate {
+    func LeaveTappped() {
+        Constants.islevae = true
+        self.navigationController?.popViewController(animated: true)//(animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var loggedInUser: UILabel!
-    @IBOutlet weak var videoView: VideoView!
+    @IBOutlet weak var videoView: VideoView?
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var roomTextField: UITextField!
     @IBOutlet weak var audioToggleButton: UIButton!
     @IBOutlet weak var videoToggleButton: UIButton!
     @IBOutlet weak var flipCameraButton: UIButton!
     private let roomFactory = RoomFactory()
-//    private let deepLinkStore: DeepLinkStoreWriting = DeepLinkStore.shared
+   
+    private let deepLinkStore: DeepLinkStoreWriting = DeepLinkStore.shared
     private let notificationCenter = NotificationCenter.default
-//    private let navigationController = UINavigationController()
     private var room: Room!
     private var participant: LocalParticipant { room.localParticipant }
     private var shouldRenderVideo = true
@@ -35,104 +41,56 @@ class LobbyViewController: UIViewController {
     var userIdentity = String()
     var userID = String()
     var userRoomName = String()
-    var lobynavi = UINavigationController()
-    
-    
-    
-   
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
-    
+        print("Avinash -- Lobbyviewcontroller ViewDidLoad")
         resetRoom()
         configureVideoView()
-        if let myView = view?.subviews.first as? UIScrollView {
-            myView.canCancelContentTouches = false
-        }
+
 //        roomTextField.attributedPlaceholder = NSAttributedString(
-//            string: "Room",
+//            string: userRoomName,
 //            attributes: [.foregroundColor: UIColor.lightGray]
 //        )
         
-//        if let deepLink = deepLinkStore.consumeDeepLink() {
-//            switch deepLink {
-//            case let .room(roomName): roomTextField.text = roomName
-//            }
-//        }
+        if let deepLink = deepLinkStore.consumeDeepLink() {
+            switch deepLink {
+            case let .room(roomName): roomTextField.text = roomName
+            }
+        }
 
 //        roomTextField .addTarget(self, action: #selector(joinRoomButtonPressed(_:)), for: .editingDidEndOnExit)
-//
-//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
-//
-        notificationCenter.addObserver(self, selector: #selector(handleRoomUpdate(_:)), name: .roomUpdate, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(handleSettingChange), name: .appSettingDidChange, object: nil)
         
-        refresh()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
-//        self.joinRoomButtonPressed(buttonJOin)
-        
-//        self.performSegue(withIdentifier: "roomSegue", sender: self)
        
         
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        shouldRenderVideo = true
+        
         refresh()
-        configureVideoView()
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        let defaults = UserDefaults.standard
-        
-        
-            self.dismiss(animated: true, completion: nil)
-    
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+        print("Avinash -- Lobbyviewcontroller viewDidDisappear")
         shouldRenderVideo = false
         configureVideoView()
-       
-       
     }
-    override func viewDidAppear(_ animated:Bool) {
-        super.viewDidAppear(true)
-        LoadRoomController()
-
-    }
-    func LoadRoomController() {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("Avinash -- Lobbyviewcontroller ViewwillAppear")
+        self.navigationItem.hidesBackButton = true
+        shouldRenderVideo = true
+        refresh()
+        configureVideoView()
        
-        let storyboard = UIStoryboard(name: "Video", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "roomViewController") as! RoomViewController
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "roomViewController") as! RoomViewController
-//        let MynavController = UINavigationController(rootViewController: vc)
-        vc.application = .shared
-        vc.modalPresentationStyle = .fullScreen
-        vc.roomnavi = self.lobynavi
-        vc.viewModel = RoomViewModelFactory().makeRoomViewModel(
-            roomName: self.userRoomName,
-            room: self.room
-        )
-//        lobynavi.pushViewController(vc, animated: true)
-//      self.present(MynavController, animated: true, completion: nil)
-        
-//        let roomViewController = storyboard.instantiateViewController(withIdentifier: "roomViewController") as! RoomViewController
-       self.present(vc, animated: true, completion: nil)
-        
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-//        let guide = view.safeAreaLayoutGuide
-//        let height = guide.layoutFrame.origin.y + 108
-//        containerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
+        let guide = view.safeAreaLayoutGuide
+        let height = guide.layoutFrame.origin.y + 108
+        containerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
     }
 
     override func viewSafeAreaInsetsDidChange() {
@@ -140,28 +98,86 @@ class LobbyViewController: UIViewController {
         
         view.setNeedsLayout()
     }
+    override func viewDidAppear(_ animated:Bool) {
+        super.viewDidAppear(true)
+     //   LoadRoomController()
+        print("Avinash -- Lobbyviewcontroller viewDidAppear")
+        if( Constants.islevae == false)
+        {
+            //LoadRoomController()
+            DispatchQueue.main.async(){
+               // self.LoadRoomController()
+               // let sender: Any?
+         self.performSegue(withIdentifier: "roomSegue", sender: self)
+            }
+        }
+        else
+        {
+            Constants.islevae = false
+            self.dismiss(animated: true)//(animated: true, completion: nil)
+        }
+    }
     
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func LoadRoomController() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let roomViewController = storyboard.instantiateViewController(withIdentifier: "roomViewController") as! RoomViewController
+        roomViewController.leaveDelegate = self
+        roomViewController.modalPresentationStyle = .fullScreen
+        roomViewController.application = .shared
+        roomViewController.tokenIS = userToken
+        roomViewController.userRoomname = userRoomName
+        let splityArray = self.userIdentity.split(separator: "@")
+        roomViewController.loginUser = String(splityArray[1])
+        roomViewController.userIdentity = userIdentity
+        roomViewController.viewModel = RoomViewModelFactory().makeRoomViewModel(
+            roomName: userRoomName , //roomTextField.text ?? "",
+            room: room
+        )
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let statsViewController = storyboard.instantiateViewController(withIdentifier: "statsViewController") as! StatsViewController
+        statsViewController.videoAppRoom = room
+        roomViewController.statsViewController = statsViewController
+    
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "roomSegue":
+            
+            // Making an alert to understand user joined in lobby view controller //
+//            let alertView = UIAlertController(title: "lobby View Controller", message: "user Joined in Lobby View Controller", preferredStyle: .alert)
+//
+//            alertView.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+//            self.present(alertView, animated: true, completion: nil)
+            
+            
             let roomViewController = segue.destination as! RoomViewController
             roomViewController.application = .shared
+            roomViewController.modalPresentationStyle = .fullScreen
+            roomViewController.leaveDelegate = self
+            roomViewController.tokenIS = userToken
+            roomViewController.userRoomname = userRoomName
+            let splityArray = self.userIdentity.split(separator: "@")
+            roomViewController.loginUser = String(splityArray[1])
+            roomViewController.userIdentity = userIdentity
             roomViewController.viewModel = RoomViewModelFactory().makeRoomViewModel(
-                roomName: self.userRoomName,
+                roomName: userRoomName , //roomTextField.text ?? "",
                 room: room
             )
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let statsViewController = storyboard.instantiateViewController(withIdentifier: "statsViewController") as! StatsViewController
-//            statsViewController.videoAppRoom = room
-//            roomViewController.statsViewController = statsViewController
-//        case "showSettings":
-//            let navigationController = segue.destination as! UINavigationController
-//            let settingsViewController = navigationController.viewControllers.first as! SettingsViewController
-//            settingsViewController.viewModel = GeneralSettingsViewModel(
-//                appInfoStore: AppInfoStoreFactory().makeAppInfoStore(),
-//                appSettingsStore: AppSettingsStore.shared,
-//                authStore: AuthStore.shared
-//            )
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let statsViewController = storyboard.instantiateViewController(withIdentifier: "statsViewController") as! StatsViewController
+            statsViewController.videoAppRoom = room
+            roomViewController.statsViewController = statsViewController
+            
+        case "showSettings":
+            let navigationController = segue.destination as! UINavigationController
+            let settingsViewController = navigationController.viewControllers.first as! SettingsViewController
+            settingsViewController.viewModel = GeneralSettingsViewModel(
+                appInfoStore: AppInfoStoreFactory().makeAppInfoStore(),
+                appSettingsStore: AppSettingsStore.shared,
+                authStore: AuthStore.shared
+            )
         default:
             break
         }
@@ -182,18 +198,17 @@ class LobbyViewController: UIViewController {
     }
     
     @IBAction func joinRoomButtonPressed(_ sender: Any) {
-        self.roomTextField.text = self.userRoomName
         guard let roomName = roomTextField.text, !roomName.isEmpty else {
             roomTextField.becomeFirstResponder()
             return
         }
-
+        
         dismissKeyboard()
-        performSegue(withIdentifier: "roomSegue", sender: self)
+      performSegue(withIdentifier: "roomSegue", sender: self)
     }
     
     private func resetRoom() {
-        room = roomFactory.makeRoom()
+        room = roomFactory.makeRoom(identity: userIdentity)
         participant.isMicOn = true
         participant.isCameraOn = true
     }
@@ -217,11 +232,12 @@ class LobbyViewController: UIViewController {
     }
     
     private func configureVideoView() {
-//        let config = VideoView.Config(
-//            videoTrack: shouldRenderVideo ? participant.cameraTrack : nil,
-//            shouldMirror: participant.shouldMirrorCameraVideo
-//        )
-//        videoView.configure(config: config)
+    
+        let config = VideoView.Config(
+            videoTrack: shouldRenderVideo ? participant.cameraTrack : nil,
+            shouldMirror: participant.shouldMirrorCameraVideo
+        )
+        videoView?.configure(config: config)
     }
     
     private func refresh() {
@@ -235,4 +251,3 @@ class LobbyViewController: UIViewController {
         roomTextField.resignFirstResponder()
     }
 }
-

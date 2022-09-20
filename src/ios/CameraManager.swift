@@ -40,7 +40,7 @@ class CameraManager: NSObject {
             }
         }
     }
-   
+    private let appSettingsStore: AppSettingsStoreWriting = AppSettingsStore.shared
     private let sourceFactory = CameraSourceFactory()
     private let configFactory = CameraConfigFactory()
     private let trackFactory = CameraTrackFactory()
