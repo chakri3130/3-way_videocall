@@ -470,13 +470,6 @@
              <pod name="AppCenter/Distribute" spec="~> 3" />
            <pod name="AppCenter/Analytics" />
            <pod name="AppCenter/Crashes" />
-             <pod name="Firebase/Messaging" />
-            <pod name="Firebase/Analytics" />
-            <pod name="Firebase/Crashlytics" /> 
-           <pod name="FirebaseUI/Auth" />
-            
-            
-           
         </pods>
     </podspec>
    </platform>
