@@ -1,6 +1,5 @@
 package src.cordova.plugin.videocall.AdvancedSettingsFragment
 
-
 import android.os.Bundle
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference

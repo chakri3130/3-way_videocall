@@ -90,7 +90,7 @@ class CustomDialog() : DialogFragment() {
                     val progressRunnable = Runnable {
                         when (progressDialog.isShowing) {
                             true -> {
-                                Toast.makeText(RoomActivity.activity, "You are not authorized to add an user", Toast.LENGTH_LONG).show()
+                                Toast.makeText(RoomActivity.activity, "You are not authorized to add a user.", Toast.LENGTH_LONG).show()
                                 progressDialog.dismiss()
                             }
                         }

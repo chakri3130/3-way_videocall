@@ -46,6 +46,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.twilio.audioswitch.AudioDevice
 import com.twilio.audioswitch.AudioDevice.*
 import com.twilio.audioswitch.AudioSwitch
+import com.uxcam.UXCam
 import cordova.plugin.videocall.BaseActivity.BaseActivity
 import cordova.plugin.videocall.InputUtils.InputUtils
 import io.uniflow.android.livedata.onEvents
@@ -115,12 +116,13 @@ class RoomActivity : BaseActivity() {
         progressDialog = ProgressDialog(activity)
         binding = RoomActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        UXCam.occludeSensitiveScreen(true)
         isDialogVisible = false
-        roomId = intent.getStringExtra("room")
-        identity = intent.getStringExtra("identity")
-        loginUser = intent.getStringExtra("identity").split("@")[1]
-        accessToken = intent.getStringExtra("token")
-        id = intent.getStringExtra("id")
+        roomId = intent.getStringExtra("room")!!
+        identity = intent.getStringExtra("identity")!!
+        loginUser = intent.getStringExtra("identity")!!.split("@")[1]
+        accessToken = intent.getStringExtra("token")!!
+        id = intent.getStringExtra("id")!!
 //
         binding.joinRoom.roomName.doOnTextChanged { text: CharSequence?, _, _, _ ->
             roomNameTextChanged(text)
@@ -354,6 +356,7 @@ class RoomActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        UXCam.occludeSensitiveScreen(false)
         recordingAnimation.cancel()
     }
 

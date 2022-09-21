@@ -21,8 +21,8 @@ public class RetrofitAPi {
                 .setLenient()
                 .create();
         return new Retrofit.Builder()
-                .baseUrl("https://c9dev2.cloud9download.com:8080/")
-//                .baseUrl("https://uat.cloud9download.com:8080/")
+//                .baseUrl("https://c9dev2.cloud9download.com:8080/")
+                .baseUrl("https://uat.cloud9download.com:8080/")
 //                .baseUrl("https://c9demo.cloud9download.com:8080/")
 //                .baseUrl("https://alaska.cloud9download.com:8080/")
 //                .baseUrl("https://mhid.cloud9download.com:8080/")
@@ -33,3 +33,4 @@ public class RetrofitAPi {
     }
 
 }
+

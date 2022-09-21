@@ -6,7 +6,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.appcompat.app.AlertDialog
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.microsoft.appcenter.analytics.Analytics
+import src.cordova.plugin.videocall.Analytics
 import com.twilio.video.*
 import com.twilio.video.TwilioException.ROOM_MAX_PARTICIPANTS_EXCEEDED_EXCEPTION
 import kotlinx.coroutines.CoroutineDispatcher
@@ -138,10 +138,14 @@ class RoomManager(
                                 "OK"
                             ) { p0, p1 -> p0.dismiss() }
                         }.create().show()
+                        val event: MutableMap<String, String> = HashMap()
+                        event["message"] = s3!!
+                        Analytics.trackEvent("ParticipantRejectedTheCall", event)
                     }
-                }catch(e: Exception){
-                    Log.e("PRTC", e.message)
-                    Analytics.trackEvent("ParticipantRejectedTheCall ${e.message}")
+                } catch (e: Exception) {
+                    val event: MutableMap<String, String> = HashMap()
+                    event["message"] = e.message!!
+                    Analytics.trackEvent("ParticipantRejectedTheCallException", event)
                 }
             }
         }
@@ -153,7 +157,7 @@ class RoomManager(
         try {
             LocalBroadcastManager.getInstance(context).unregisterReceiver(receiver)
         } catch (e: Exception) {
-            Log.e("reject participant BRE", e.message)
+            Log.e("reject participant BRE", e.message + "")
         }
     }
 

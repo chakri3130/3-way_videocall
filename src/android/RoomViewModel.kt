@@ -11,8 +11,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import cordova.plugin.videocall.ApiService.ApiService
-import cordova.plugin.videocall.RetrofitAPi.RetrofitAPi
 import com.twilio.audioswitch.AudioSwitch
 import com.twilio.video.Participant
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,6 +18,8 @@ import io.reactivex.schedulers.Schedulers
 import io.uniflow.android.AndroidDataFlow
 import io.uniflow.core.flow.data.UIState
 import io.uniflow.core.flow.onState
+import cordova.plugin.videocall.ApiService.ApiService
+import cordova.plugin.videocall.RetrofitAPi.RetrofitAPi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -113,7 +113,7 @@ class RoomViewModel(
                 roomManager.disconnect()
                 try {
                     Log.e("disconnected->", "disconnect called")
-                    Log.e("room name dis->", roomManager.room?.name)
+                    Log.e("room name dis->", roomManager.room?.name!!)
                     Log.e("room sid dis->", RoomActivity.roomSid)
                     val intent = Intent("aftercallends")
                     var b = Bundle()

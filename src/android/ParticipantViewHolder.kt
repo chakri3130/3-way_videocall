@@ -4,13 +4,13 @@ import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.cloud9.telehealth.R
-import com.microsoft.appcenter.analytics.Analytics
 import com.twilio.video.NetworkQualityLevel
 import com.twilio.video.NetworkQualityLevel.*
 import com.twilio.video.VideoTrack
 import cordova.plugin.videocall.ParticipantThumbView.ParticipantThumbView
 import cordova.plugin.videocall.ParticipantView.ParticipantView
 import cordova.plugin.videocall.videocall.videocall
+import src.cordova.plugin.videocall.Analytics.Companion.trackEvent
 import src.cordova.plugin.videocall.LocalParticipantManager.LocalParticipantManager
 import src.cordova.plugin.videocall.ParticipantViewState.ParticipantViewState
 import src.cordova.plugin.videocall.RoomViewEvent.RoomViewEvent
@@ -94,33 +94,51 @@ internal class ParticipantViewHolder(private val thumb: ParticipantThumbView) :
         val nameAndRole = videocall.identity.split("@")[0]+"@"+videocall.identity.split("@")[1]
         when (networkQualityLevel) {
             NETWORK_QUALITY_LEVEL_ZERO -> {
-                if (identity == localParticipantIdentity)
-                    Analytics.trackEvent("$nameAndRole is Very Bad $dateAndTime")
+                if (identity == localParticipantIdentity) {
+                    val event: MutableMap<String, String> = HashMap()
+                    event["message"] = "$nameAndRole is Very Bad $dateAndTime"
+                    trackEvent("Network Quality", event)
+                }
                 R.drawable.network_quality_level_0
             }
             NETWORK_QUALITY_LEVEL_ONE -> {
-                if (identity == localParticipantIdentity)
-                    Analytics.trackEvent("$nameAndRole is Bad $dateAndTime")
+                if (identity == localParticipantIdentity) {
+                    val event: MutableMap<String, String> = HashMap()
+                    event["message"] = "$nameAndRole is Bad $dateAndTime"
+                    trackEvent("Network Quality", event)
+                }
                 R.drawable.network_quality_level_1
             }
             NETWORK_QUALITY_LEVEL_TWO -> {
-                if (identity == localParticipantIdentity)
-                    Analytics.trackEvent("$nameAndRole is Good $dateAndTime")
+                if (identity == localParticipantIdentity){
+                    val event: MutableMap<String, String> = HashMap()
+                    event["message"] = "$nameAndRole is Good $dateAndTime"
+                    trackEvent("Network Quality", event)
+                }
                 R.drawable.network_quality_level_2
             }
             NETWORK_QUALITY_LEVEL_THREE -> {
-                if (identity == localParticipantIdentity)
-                    Analytics.trackEvent("$nameAndRole is Very Good $dateAndTime")
+                if (identity == localParticipantIdentity){
+                    val event: MutableMap<String, String> = HashMap()
+                    event["message"] = "$nameAndRole is Very Good $dateAndTime"
+                    trackEvent("Network Quality", event)
+                }
                 R.drawable.network_quality_level_3
             }
             NETWORK_QUALITY_LEVEL_FOUR -> {
-                if (identity == localParticipantIdentity)
-                    Analytics.trackEvent("$nameAndRole is Excellent $dateAndTime")
+                if (identity == localParticipantIdentity){
+                    val event: MutableMap<String, String> = HashMap()
+                    event["message"] = "$nameAndRole is Excellent $dateAndTime"
+                    trackEvent("Network Quality", event)
+                }
                 R.drawable.network_quality_level_4
             }
             NETWORK_QUALITY_LEVEL_FIVE -> {
-                if (identity == localParticipantIdentity)
-                    Analytics.trackEvent("$nameAndRole is Marvellous $dateAndTime")
+                if (identity == localParticipantIdentity){
+                    val event: MutableMap<String, String> = HashMap()
+                    event["message"] = "$nameAndRole is Marvellous $dateAndTime"
+                    trackEvent("Network Quality", event)
+                }
                 R.drawable.network_quality_level_5
             }
             else -> null

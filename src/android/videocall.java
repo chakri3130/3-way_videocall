@@ -18,13 +18,15 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import com.microsoft.appcenter.analytics.Analytics;
-
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import src.cordova.plugin.videocall.Analytics;
 import src.cordova.plugin.videocall.PermissionUtil.PermissionUtil;
 import src.cordova.plugin.videocall.RoomActivity.RoomActivity;
 
@@ -105,12 +107,18 @@ public class videocall extends CordovaPlugin {
             WifiManager wifiManager = (WifiManager) cordova.getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             int linkSpeed = wifiManager.getConnectionInfo().getLinkSpeed();
             Toast.makeText(cordova.getContext(), "linkspeed wifi in MBPS " + linkSpeed, Toast.LENGTH_LONG).show();
-            if (linkSpeed < 3)
-                Analytics.trackEvent("Low bandwidth for the user " + roomName + "@" + identity);
+            if (linkSpeed < 3) {
+                Map<String, String> event = new HashMap<>();
+                event.put("message", "Low bandwidth for the user " + roomName + "@" + identity);
+                Analytics.trackEvent("Bandwidth", event);
+            }
         } else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
             Toast.makeText(cordova.getContext(), "linkspeed mobile in KBPS " + downloadSpeed, Toast.LENGTH_LONG).show();
-            if (downloadSpeed < 3000)
-                Analytics.trackEvent("Low bandwidth for the user " + roomName + "@" + identity);
+            if (downloadSpeed < 3000) {
+                Map<String, String> event = new HashMap<>();
+                event.put("message", "Low bandwidth for the user " + roomName + "@" + identity);
+                Analytics.trackEvent("Bandwidth", event);
+            }
 
         }
         return true;
