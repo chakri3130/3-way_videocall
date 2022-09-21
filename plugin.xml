@@ -278,8 +278,8 @@
 <source-file src="src/ios/Environment.swift" />
 <source-file src="src/ios/EnvironmentVariableStore.swift" />
 <source-file src="src/ios/GeneralSettingsViewModel.swift" />
-<header-file src="src/ios/HeaderTableViewCell.h” />
-<source-file src="src/ios/HeaderTableViewCell.m” />
+<header-file src="src/ios/HeaderTableViewCell.h" />
+<source-file src="src/ios/HeaderTableViewCell.m" />
 <source-file src="src/ios/IndexSetHelpers.swift" />
 <source-file src="src/ios/InternalAPIErrorResponseDecoder.swift" />
 <source-file src="src/ios/InternalAuthStore.swift" />
@@ -349,10 +349,10 @@
 <source-file src="src/ios/SettingsViewModel.swift" />
 <source-file src="src/ios/ShowError.swift" />
 <source-file src="src/ios/SignInSegueIdentifierFactory.swift" />
-<header-file src="src/ios/StatsUIModel.h” />
-<source-file src="src/ios/StatsUIModel.m” />
-<header-file src="src/ios/StatsViewController.h” />
-<source-file src="src/ios/StatsViewController.m” />
+<header-file src="src/ios/StatsUIModel.h" />
+<source-file src="src/ios/StatsUIModel.m" />
+<header-file src="src/ios/StatsViewController.h" />
+<source-file src="src/ios/StatsViewController.m" />
 <source-file src="src/ios/Storage.swift" />
 <source-file src="src/ios/StringHelpers.swift" />
 <source-file src="src/ios/SwiftToObjc.swift" />
@@ -363,8 +363,8 @@
 <source-file src="src/ios/Topology.swift" />
 <source-file src="src/ios/TrackName.swift" />
 <source-file src="src/ios/TrackPriority.swift" />
-<header-file src="src/ios/TrackStatsTableViewCell.h” />
-<source-file src="src/ios/TrackStatsTableViewCell.m” />
+<header-file src="src/ios/TrackStatsTableViewCell.h" />
+<source-file src="src/ios/TrackStatsTableViewCell.m" />
 <source-file src="src/ios/TrackSwitchOffMode.swift" />
 <source-file src="src/ios/TwilioAccessTokenStore.swift" />
 <source-file src="src/ios/TwilioAccessTokenStoreFactory.swift" />
