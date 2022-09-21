@@ -392,53 +392,53 @@
 <source-file src="src/ios/videocall.swift" />
 
 
-       <resource-file src="src/ios/Resources/Resources/Error.png" target="Resources/Error.png" />
-       <resource-file src="src/ios/Resources/Resources/hangup icon.png" target="Resources/hangup icon.png" />  
-       <resource-file src="src/ios/Resources/Resources/hangup icon@2x.png" target="Resources/hangup icon@2x.png" />
-       <resource-file src="src/ios/Resources/Resources/hangup icon@3x.png" target="Resources/hangup icon@3x.png" />
-       <resource-file src="src/ios/Resources/Resources/ic_mic_off_white_2x.png" target="Resources/ic_mic_off_white_2x.png" />
-       <resource-file src="src/ios/Resources/Resources/ic_mic_off_white_3x.png" target="Resources/ic_mic_off_white_3x.png" />
-       <resource-file src="src/ios/Resources/Resources/ic_mic_off_white.png" target="Resources/ic_mic_off_white.png" />
-       <resource-file src="src/ios/Resources/Resources/ic_mic_white_2x.png" target="Resources/ic_mic_white_2x.png" />
-       <resource-file src="src/ios/Resources/Resources/ic_mic_white_3x.png" target="Resources/ic_mic_white_3x.png" />
-        <resource-file src="src/ios/Resources/Resources/ic_mic_white.png" target="Resources/ic_mic_white.png" />
-         <resource-file src="src/ios/Resources/Resources/ic_settings_white.png" target="Resources/ic_settings_white.png" />
-         <resource-file src="src/ios/Resources/Resources/ic_settings_white_2x.png" target="Resources/ic_settings_white_2x.png" />
-          <resource-file src="src/ios/Resources/Resources/ic_settings_white_3x.png" target="Resources/ic_settings_white_3x.png" />
-       <resource-file src="src/ios/Resources/Resources/ic_switch_camera_white_2x.png" target="Resources/ic_switch_camera_white_2x.png" />
-       <resource-file src="src/ios/Resources/Resources/ic_switch_camera_white_3x.png" target="Resources/ic_switch_camera_white_3x.png" />
-       <resource-file src="src/ios/Resources/Resources/ic_switch_camera_white.png" target="Resources/ic_switch_camera_white.png" />
-      <resource-file src="src/ios/Resources/Resources/Pin.png" target="Resources/Pin.png" />
-       <resource-file src="src/ios/Resources/Resources/stats disabled image.png" target="Resources/stats disabled image.png" />
-      <resource-file src="src/ios/Resources/Resources/stats disabled image@2x.png" target="Resources/stats disabled image@2x.png" />
-      <resource-file src="src/ios/Resources/Resources/stats disabled image@3x.png" target="Resources/stats disabled image@3x.png" />
-      <resource-file src="src/ios/Resources/Resources/Vector-1.png" target="Resources/Vector-1.png" />
-      <resource-file src="src/ios/Resources/Resources/Vector-2.png" target="Resources/Vector-2.png" />
-      <resource-file src="src/ios/Resources/Resources/videocam_off-24px 1.png" target="Resources/videocam_off-24px 1.png" />
-      <resource-file src="src/ios/Resources/Resources/videocam-24px 1.png" target="Resources/videocam-24px 1.png" />
-      <resource-file src="src/ios/Resources/Resources/network-quality-level-0~universal@1x.png" target="Resources/network-quality-level-0~universal@1x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-0~universal@2x.png" target="Resources/network-quality-level-0~universal@2x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-0~universal@3x.png" target="Resources/network-quality-level-0~universal@3x.png" />
+       <resource-file src="src/ios/Resources/Resources/Error.png" target="Resources/Resources/Error.png" />
+       <resource-file src="src/ios/Resources/Resources/hangup icon.png" target="Resources/Resources/hangup icon.png" />  
+       <resource-file src="src/ios/Resources/Resources/hangup icon@2x.png" target="Resources/Resources/hangup icon@2x.png" />
+       <resource-file src="src/ios/Resources/Resources/hangup icon@3x.png" target="Resources/Resources/hangup icon@3x.png" />
+       <resource-file src="src/ios/Resources/Resources/ic_mic_off_white_2x.png" target="Resources/Resources/ic_mic_off_white_2x.png" />
+       <resource-file src="src/ios/Resources/Resources/ic_mic_off_white_3x.png" target="Resources/Resources/ic_mic_off_white_3x.png" />
+       <resource-file src="src/ios/Resources/Resources/ic_mic_off_white.png" target="Resources/Resources/ic_mic_off_white.png" />
+       <resource-file src="src/ios/Resources/Resources/ic_mic_white_2x.png" target="Resources/Resources/ic_mic_white_2x.png" />
+       <resource-file src="src/ios/Resources/Resources/ic_mic_white_3x.png" target="Resources/Resources/ic_mic_white_3x.png" />
+        <resource-file src="src/ios/Resources/Resources/ic_mic_white.png" target="Resources/Resources/ic_mic_white.png" />
+         <resource-file src="src/ios/Resources/Resources/ic_settings_white.png" target="Resources/Resources/ic_settings_white.png" />
+         <resource-file src="src/ios/Resources/Resources/ic_settings_white_2x.png" target="Resources/Resources/ic_settings_white_2x.png" />
+          <resource-file src="src/ios/Resources/Resources/ic_settings_white_3x.png" target="Resources/Resources/ic_settings_white_3x.png" />
+       <resource-file src="src/ios/Resources/Resources/ic_switch_camera_white_2x.png" target="Resources/Resources/ic_switch_camera_white_2x.png" />
+       <resource-file src="src/ios/Resources/Resources/ic_switch_camera_white_3x.png" target="Resources/Resources/ic_switch_camera_white_3x.png" />
+       <resource-file src="src/ios/Resources/Resources/ic_switch_camera_white.png" target="Resources/Resources/ic_switch_camera_white.png" />
+      <resource-file src="src/ios/Resources/Resources/Pin.png" target="Resources/Resources/Pin.png" />
+       <resource-file src="src/ios/Resources/Resources/stats disabled image.png" target="Resources/Resources/stats disabled image.png" />
+      <resource-file src="src/ios/Resources/Resources/stats disabled image@2x.png" target="Resources/Resources/stats disabled image@2x.png" />
+      <resource-file src="src/ios/Resources/Resources/stats disabled image@3x.png" target="Resources/Resources/stats disabled image@3x.png" />
+      <resource-file src="src/ios/Resources/Resources/Vector-1.png" target="Resources/Resources/Vector-1.png" />
+      <resource-file src="src/ios/Resources/Resources/Vector-2.png" target="Resources/Resources/Vector-2.png" />
+      <resource-file src="src/ios/Resources/Resources/videocam_off-24px 1.png" target="Resources/Resources/videocam_off-24px 1.png" />
+      <resource-file src="src/ios/Resources/Resources/videocam-24px 1.png" target="Resources/Resources/videocam-24px 1.png" />
+      <resource-file src="src/ios/Resources/Resources/network-quality-level-0~universal@1x.png" target="Resources/Resources/network-quality-level-0~universal@1x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-0~universal@2x.png" target="Resources/Resources/network-quality-level-0~universal@2x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-0~universal@3x.png" target="Resources/Resources/network-quality-level-0~universal@3x.png" />
 
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-1~universal@1x.png" target="Resources/network-quality-level-1~universal@1x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-1~universal@2x.png" target="Resources/network-quality-level-1~universal@2x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-1~universal@3x.png" target="Resources/network-quality-level-1~universal@3x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-1~universal@1x.png" target="Resources/Resources/network-quality-level-1~universal@1x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-1~universal@2x.png" target="Resources/Resources/network-quality-level-1~universal@2x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-1~universal@3x.png" target="Resources/Resources/network-quality-level-1~universal@3x.png" />
 
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-2~universal@1x.png" target="Resources/network-quality-level-2~universal@1x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-2~universal@2x.png" target="Resources/network-quality-level-2~universal@2x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-2~universal@3x.png" target="Resources/network-quality-level-2~universal@3x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-2~universal@1x.png" target="Resources/Resources/network-quality-level-2~universal@1x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-2~universal@2x.png" target="Resources/Resources/network-quality-level-2~universal@2x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-2~universal@3x.png" target="Resources/Resources/network-quality-level-2~universal@3x.png" />
 
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-3~universal@1x.png" target="Resources/network-quality-level-3~universal@1x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-3~universal@2x.png" target="Resources/network-quality-level-3~universal@2x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-3~universal@3x.png" target="Resources/network-quality-level-3~universal@3x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-3~universal@1x.png" target="Resources/Resources/network-quality-level-3~universal@1x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-3~universal@2x.png" target="Resources/Resources/network-quality-level-3~universal@2x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-3~universal@3x.png" target="Resources/Resources/network-quality-level-3~universal@3x.png" />
 
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-4~universal@1x.png" target="Resources/network-quality-level-4~universal@1x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-4~universal@2x.png" target="Resources/network-quality-level-4~universal@2x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-4~universal@3x.png" target="Resources/network-quality-level-4~universal@3x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-4~universal@1x.png" target="Resources/Resources/network-quality-level-4~universal@1x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-4~universal@2x.png" target="Resources/Resources/network-quality-level-4~universal@2x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-4~universal@3x.png" target="Resources/Resources/network-quality-level-4~universal@3x.png" />
 
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-5~universal@1x.png" target="Resources/network-quality-level-5~universal@1x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-5~universal@2x.png" target="Resources/network-quality-level-5~universal@2x.png" />
-       <resource-file src="src/ios/Resources/Resources/network-quality-level-5~universal@3x.png" target="Resources/network-quality-level-5~universal@3x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-5~universal@1x.png" target="Resources/Resources/network-quality-level-5~universal@1x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-5~universal@2x.png" target="Resources/Resources/network-quality-level-5~universal@2x.png" />
+       <resource-file src="src/ios/Resources/Resources/network-quality-level-5~universal@3x.png" target="Resources/Resources/network-quality-level-5~universal@3x.png" />
       
       <resource-file src="src/ios/Resources/add.png" target="Resources/add.png" />
  
