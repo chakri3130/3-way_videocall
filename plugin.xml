@@ -469,6 +469,7 @@
             <pod name = "FirebaseCrashlytics" />
              <pod name = "FirebaseUI/Auth" />
            <pod name="FirebaseUI/Google" spec="~> 9" />
+           <pod name="AppCenter/Distribute" />
           
           
         </pods>
