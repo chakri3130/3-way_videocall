@@ -15,6 +15,9 @@
 //
 
 import UIKit
+import AppCenter
+import AppCenterDistribute
+import AppCenterAnalytics
 
 class ParticipantCell: UICollectionViewCell {
     struct Status {
@@ -24,18 +27,35 @@ class ParticipantCell: UICollectionViewCell {
     }
     
     @IBOutlet weak var videoView: VideoView!
+    var localParticipantUser = ""
     @IBOutlet weak var identityLabel: UILabel!
     @IBOutlet weak var networkQualityImage: UIImageView!
     @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var muteView: UIView!
     
-    func configure(participant: Participant) {
-        identityLabel.text = participant.identity
+
+    func configure(participant: Participant,localParticipantStr:String) {
+        if(localParticipantStr.isEmpty)
+        {
+            UserDefaults.standard.set("", forKey: "user")
+        }
+        else
+        {
+            localParticipantUser = localParticipantStr
+            let splityArray1 = localParticipantUser.split(separator: "@")
+            let localParticipantStr1 = "\(splityArray1[0])@\(splityArray1[1])"
+            UserDefaults.standard.set(localParticipantStr1, forKey: "user")
+        }
+        let splityArray = participant.identity.split(separator: "@")
+        let role = String(splityArray[0])
+        identityLabel.text = role
         muteView.isHidden = participant.isMicOn
         pinView.isHidden = !participant.isPinned
         
         if let imageName = participant.networkQualityLevel.imageName {
             networkQualityImage.image = UIImage(named: imageName)
+            
+
         } else {
             networkQualityImage.image = nil
         }
@@ -51,17 +71,64 @@ class ParticipantCell: UICollectionViewCell {
 }
 
 private extension NetworkQualityLevel {
+    
+    
+    
     var imageName: String? {
         switch self {
         case .unknown: return nil
-        case .zero: return "network-quality-level-0"
-        case .one: return "network-quality-level-1"
-        case .two: return "network-quality-level-2"
-        case .three: return "network-quality-level-3"
-        case .four: return "network-quality-level-4"
-        case .five: return "network-quality-level-5"
+        case .zero:
+            
+        
+            if(!(String(describing: UserDefaults.standard.string(forKey: "user")!)).isEmpty)
+            {
+                MSAnalytics.trackEvent("\(String(describing: UserDefaults.standard.string(forKey: "user")!)) is Very Bad \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+                
+            }
+          
+            return "network-quality-level-0"
+        case .one:
+            if(!(String(describing: UserDefaults.standard.string(forKey: "user")!)).isEmpty)
+            {
+                MSAnalytics.trackEvent("\(String(describing: UserDefaults.standard.string(forKey: "user")!)) is Bad \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+                
+            }
+            return "network-quality-level-1"
+        case .two:
+            if(!(String(describing: UserDefaults.standard.string(forKey: "user")!)).isEmpty)
+            {
+                MSAnalytics.trackEvent("\(String(describing: UserDefaults.standard.string(forKey: "user")!)) is Good \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+            }
+            return "network-quality-level-2"
+        case .three:
+            if(!(String(describing: UserDefaults.standard.string(forKey: "user")!)).isEmpty)
+            {
+                MSAnalytics.trackEvent("\(String(describing: UserDefaults.standard.string(forKey: "user")!)) is Very Good \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+            }
+            return "network-quality-level-3"
+        case .four:
+            if(!(String(describing: UserDefaults.standard.string(forKey: "user")!)).isEmpty)
+            {
+                MSAnalytics.trackEvent("\(String(describing: UserDefaults.standard.string(forKey: "user")!)) is Excellent \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+            }
+            return "network-quality-level-4"
+        case .five:
+            if(!(String(describing: UserDefaults.standard.string(forKey: "user")!)).isEmpty)
+            {
+                MSAnalytics.trackEvent("\(String(describing: UserDefaults.standard.string(forKey: "user")!)) is Marvelous \(Date().string(format: "MM/dd/yyyy HH:mm:ss"))");
+            }
+            return "network-quality-level-5"
         @unknown default:
             return nil
         }
     }
 }
+
+extension Date {
+    func string(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
+}
+
