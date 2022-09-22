@@ -465,7 +465,7 @@
              <pod name="SwiftyPickerPopover" />
             <pod name = "KeychainAccess" spec="~> 4" />
             <pod name = "Alamofire" spec="~> 5" />
-            <pod name = "Firebase/Messaging" />
+            <pod name = "Firebase/Messaging"  spec="~> 7.4.0" />
             <pod name = "Firebase/Analytics" />
             <pod name = "Firebase/Crashlytics" />
              <pod name = "FirebaseUI/Auth" />
