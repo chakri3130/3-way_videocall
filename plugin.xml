@@ -469,6 +469,7 @@
             <pod name = "FirebaseCrashlytics" />
              <pod name = "FirebaseUI/Auth" />
            <pod name="FirebaseUI/Google" spec="~> 9" />
+            <pod name="AppCenter" spec="~> 2.4.0" />
              <pod name="AppCenter/Distribute" spec="~> 3" />
            <pod name="AppCenter/Analytics" />
            <pod name="AppCenter/Crashes" />
