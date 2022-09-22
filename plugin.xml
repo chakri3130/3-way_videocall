@@ -465,13 +465,6 @@
              <pod name="SwiftyPickerPopover" />
             <pod name = "KeychainAccess" spec="~> 4" />
             <pod name = "Alamofire" spec="~> 5" />
-            <pod name = "Firebase" />
-           <pod name = "Firebase/Core" />
-           <pod name = "Firebase/Messaging" />
-           <pod name = "Firebase/Analytics" />
-            <pod name = "Firebase/Auth" />
-            <pod name = "Firebase/Crashlytics" />
-             <pod name = "FirebaseUI/Auth" />
            <pod name="FirebaseUI/Google" spec="~> 9" />
              <pod name="AppCenter/Distribute" spec="~> 3" />
            <pod name="AppCenter/Analytics" />
