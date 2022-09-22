@@ -60,7 +60,7 @@
       <source-file src="src/android/ParticipantViewHolder.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall/ParticipantViewHolder" />
       <source-file src="src/android/PrimaryParticipantController.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall/PrimaryParticipantController" />
       <!-- As we are using this class from TwilioAudio Plugin,so commenting this line instead of removing class from TwilioVideo plugin -->
-      <!-- <source-file src="src/android/RetrofitAPi.java" target-dir="src/cordova/plugin/videocall/RetrofitAPi" /> -->
+      <source-file src="src/android/RetrofitAPi.java" target-dir="src/cordova/plugin/videocall/RetrofitAPi" />
       <source-file src="src/android/RoomActivity.kt" target-dir="app/src/main/kotlin/src/cordova/plugin/videocall/RoomActivity" />
       <source-file src="src/android/RoomActivityModule.java" target-dir="src/cordova/plugin/videocall/RoomActivityModule" />
       <source-file src="src/android/RoomActivitySubcomponent.java" target-dir="src/cordova/plugin/videocall/RoomActivitySubcomponen" />
