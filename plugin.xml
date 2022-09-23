@@ -7,16 +7,14 @@
       <clobbers target="cordova.plugins.videocall" />
    </js-module>
    <platform name="android">
-      <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
-          <application android:name="src.cordova.plugin.videocall.VideoApplication.VideoApplication" />
-      </edit-config>
+      
       <config-file parent="/*" target="res/xml/config.xml">
          <feature name="videocall">
             <param name="android-package" value="cordova.plugin.videocall.videocall.videocall" />
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml">
-        
+        <application android:name="src.cordova.plugin.videocall.VideoApplication.VideoApplication" />
          <uses-permission android:name="android.permission.INTERNET" />
          <uses-feature android:name="android.hardware.camera" />
          <uses-feature android:name="android.hardware.camera.autofocus" />
